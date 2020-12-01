@@ -18,3 +18,9 @@ Ah man 503s.
 
 Heeeey we got inputs! Alright. Not the most elegant solution but we're 2 stars closer. Gonna massage
 how the project looks a little now. 
+
+### Done 
+
+I have a feeling I might need that "find a sum" kinda deal in the future. This is gonna go from split days
+to a single library kinda deal. At least, that's what usually happens. Already have my many-small-files tendency
+showing. Also, going to try to remember to add any sketches/notes I take on my reMarkable to the repo. 
