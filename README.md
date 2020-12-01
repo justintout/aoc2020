@@ -10,3 +10,11 @@ might just keep it normal. Going to focus on getting the most minimal answers I 
 test fully. 
 
 $5 says we end up building a computer. 
+
+
+## Day 1
+
+Ah man 503s.
+
+Heeeey we got inputs! Alright. Not the most elegant solution but we're 2 stars closer. Gonna massage
+how the project looks a little now. 
