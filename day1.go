@@ -1,59 +1,53 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
 
-// Day1 returns the solutions to day 1's puzzle, given the path to the input file
-func Day1(path string) ([2]int, error) {
-	input, err := ReadNumbersFromFile(path)
-	var answers [2]int
-	if err != nil {
-		return answers, err
+	"gonum.org/v1/gonum/stat/combin"
+)
+
+func day1(inputs []string) (int, int, error) {
+	var numbers []int
+	var part1, part2 int
+	for _, line := range inputs {
+		n, err := strconv.Atoi(line)
+		if err != nil {
+			return part1, part2, fmt.Errorf("error parsing input line: %s", err.Error())
+		}
+		numbers = append(numbers, n)
 	}
-	p1, err := day1part1(input)
-	if err != nil {
-		return answers, fmt.Errorf("error in part 1: %s", err.Error())
+	var err error
+	if part1, err = findSum(2, 2020, numbers); err != nil {
+		return part1, part2, fmt.Errorf("error in part 1: %s", err.Error())
 	}
-	p2, err := day1part2(input)
-	if err != nil {
-		return answers, fmt.Errorf("error in part 2: %s", err.Error())
+	if part2, err = findSum(3, 2020, numbers); err != nil {
+		return part1, part2, fmt.Errorf("error in part 2: %s", err.Error())
 	}
-	return [2]int{p1, p2}, nil
+
+	return part1, part2, nil
 }
 
-func day1part1(input []int) (int, error) {
+func findSum(n int, target int, inputs []int) (int, error) {
 	var answer int
-	for a := 0; a < len(input); a++ {
-		for b := a + 1; b < len(input); b++ {
-			if input[a]+input[b] == 2020 {
-				answer = input[a] * input[b]
+	cs := combin.Combinations(len(inputs), n)
+	for _, c := range cs {
+		sum := 0
+		var is []int
+		for _, idx := range c {
+			is = append(is, inputs[idx])
+		}
+		for _, idx := range c {
+			sum = sum + inputs[idx]
+		}
+		if sum == target {
+			answer = inputs[c[0]]
+			for i := 1; i < len(c); i++ {
+				answer = answer * inputs[c[i]]
 			}
+			return answer, nil
 		}
 	}
 
-	var err error
-	if answer == 0 {
-		err = fmt.Errorf("no answer found")
-	}
-
-	return answer, err
-}
-
-func day1part2(input []int) (int, error) {
-	var answer int
-	for a := 0; a < len(input); a++ {
-		for b := a + 1; b < len(input); b++ {
-			for c := b + 1; c < len(input); c++ {
-				if input[a]+input[b]+input[c] == 2020 {
-					answer = input[a] * input[b] * input[c]
-				}
-			}
-		}
-	}
-
-	var err error
-	if answer == 0 {
-		err = fmt.Errorf("no answer found")
-	}
-
-	return answer, err
+	return answer, fmt.Errorf("no answer found")
 }

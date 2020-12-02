@@ -3,43 +3,21 @@ package main
 import "testing"
 
 func TestDay1(t *testing.T) {
-	t.Run("Part 1", func(t *testing.T) {
-		input := []int{1721, 979, 366, 299, 675, 1456}
-		expected := 514579
-		result, err := day1part1(input)
-		if err != nil {
-			t.Error(err)
-		}
+	inputs := []string{"1721", "979", "366", "299", "675", "1456"}
 
-		if expected != result {
-			t.Errorf("incorrect result; got: %d; want: %d", result, expected)
-		}
-	})
+	expected1 := 514579
+	expected2 := 241861950
 
-	t.Run("Part 2", func(t *testing.T) {
-		input := []int{1721, 979, 366, 299, 675, 1456}
-		expected := 241861950
-		result, err := day1part2(input)
-		if err != nil {
-			t.Error(err)
-		}
+	result1, result2, err := day1(inputs)
+	if err != nil {
+		t.Error(err)
+	}
 
-		if expected != result {
-			t.Errorf("incorrect result; got: %d; want: %d", result, expected)
-		}
-	})
+	if expected1 != result1 {
+		t.Errorf("error in part 1, got: %d, want: %d", result1, expected1)
+	}
 
-	t.Run("Day 1", func(t *testing.T) {
-		expected := [2]int{514579, 241861950}
-		answers, err := Day1("./input/day1-example")
-		if err != nil {
-			t.Error(err)
-		}
-
-		for i := 0; i < 2; i++ {
-			if expected[i] != answers[i] {
-				t.Errorf("wrong answer: %d; got: %d; want: %d", i, answers[i], expected[i])
-			}
-		}
-	})
+	if expected2 != result2 {
+		t.Errorf("error in part 2, got: %d, want: %d", result2, expected2)
+	}
 }

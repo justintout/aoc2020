@@ -38,3 +38,9 @@ Update: Ah crap. WOW says it's a 12-3 maintenance window. Almost got part 2 subm
 ### Done
 
 That one was cute. I went hamfisted with the solution I think. Let's dumb this down a little.
+
+## Day 3
+
+### Prerelease
+
+Yeah, this feels a lot better. Also went back and really simplified the two solutions thus far. Need to re-test the helper functions for the days.

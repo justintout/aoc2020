@@ -3,32 +3,20 @@ package main
 import "testing"
 
 func TestDay2(t *testing.T) {
-	t.Run("Part 1", func(t *testing.T) {
-		input := []string{"1-3 a: abcde", "1-3 b: cdefg", "2-9 c: ccccccccc"}
-		expected := 2
+	inputs := []string{"1-3 a: abcde", "1-3 b: cdefg", "2-9 c: ccccccccc"}
 
-		result, err := day2part1(input)
-		if err != nil {
-			t.Error(err)
-		}
+	expected1 := 2
+	expected2 := 1
 
-		if expected != result {
-			t.Errorf("incorrect answer; got: %d; want: %d", result, expected)
-		}
-	})
+	result1, result2, err := day2(inputs)
+	if err != nil {
+		t.Error(err)
+	}
+	if expected1 != result1 {
+		t.Errorf("error in part 1, got: %d, want: %d", result1, expected1)
+	}
 
-	t.Run("Part 2", func(t *testing.T) {
-		input := []string{"1-3 a: abcde", "1-3 b: cdefg", "2-9 c: ccccccccc"}
-		expected := 1
-
-		result, err := day2part2(input)
-		if err != nil {
-			t.Error(err)
-		}
-
-		if expected != result {
-			t.Errorf("incorrect answer; got: %d; want: %d", result, expected)
-		}
-	})
-
+	if expected2 != result2 {
+		t.Errorf("error in part 2, got: %d, want: %d", result2, expected2)
+	}
 }

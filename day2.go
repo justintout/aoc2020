@@ -6,73 +6,84 @@ import (
 	"strings"
 )
 
-// Day2 solves the second day for AoC 2020
-func Day2(path string) ([2]int, error) {
-	var answers [2]int
-	inputs, err := ReadStringsFromFile(path)
-	if err != nil {
-		return answers, err
+func day2(inputs []string) (int, int, error) {
+	var part1, part2 int
+	var instances []inst
+	for _, input := range inputs {
+		i, err := newInst(input)
+		if err != nil {
+			return part1, part2, err
+		}
+		instances = append(instances, i)
 	}
 
-	answers[0], err = day2part1(inputs)
-	if err != nil {
-		return answers, err
+	for _, inst := range instances {
+		if validateCount(inst) {
+			part1 = part1 + 1
+		}
+		if validatePosition(inst) {
+			part2 = part2 + 1
+		}
 	}
 
-	answers[1], err = day2part2(inputs)
-	if err != nil {
-		return answers, err
-	}
-
-	return answers, err
+	return part1, part2, nil
 }
 
-func day2part1(inputs []string) (int, error) {
-	var valid int
-	for _, input := range inputs {
-		s := strings.Split(input, ":")   // policy is at 0, password is at 1
-		ss := strings.Split(s[0], " ")   // range is at 0, letter is at 1
-		sss := strings.Split(ss[0], "-") // lower is at 0, upper is at 1
-		lower, err := strconv.Atoi(sss[0])
-		if err != nil {
-			return valid, fmt.Errorf("error parsing lower bound in policy: %s", err.Error())
-		}
-		upper, err := strconv.Atoi(sss[1])
-		if err != nil {
-			return valid, fmt.Errorf("error parsing upper bound in policy: %s", err.Error())
-		}
-		var count int
-		for _, c := range s[1] {
-			if string(c) == ss[1] {
-				count = count + 1
-			}
-		}
-		if count >= lower && count <= upper {
-			valid = valid + 1
-		}
-	}
-	return valid, nil
+type policy struct {
+	lower  int
+	upper  int
+	letter string
 }
 
-func day2part2(inputs []string) (int, error) {
-	var valid int
+func newPolicy(p string) (policy, error) {
+	s := strings.Split(p, " ")     // range is at 0, letter is at 1
+	ss := strings.Split(s[0], "-") // lower is at 0, upper is at 1
+	lower, err := strconv.Atoi(ss[0])
+	if err != nil {
+		return policy{}, fmt.Errorf("error parsing lower bound in policy: %s", err.Error())
+	}
+	upper, err := strconv.Atoi(ss[1])
+	if err != nil {
+		return policy{}, fmt.Errorf("error parsing upper bound in policy: %s", err.Error())
+	}
+	return policy{
+		lower:  lower,
+		upper:  upper,
+		letter: s[1],
+	}, nil
+}
 
-	for _, input := range inputs {
-		s := strings.Split(input, ":")   // policy is at 0, password is at 1
-		ss := strings.Split(s[0], " ")   // range is at 0, letter is at 1
-		sss := strings.Split(ss[0], "-") // first is at 0, second is at 1
-		first, err := strconv.Atoi(sss[0])
-		if err != nil {
-			return valid, fmt.Errorf("error parsing first position in policy: %s", err.Error())
-		}
-		second, err := strconv.Atoi(sss[1])
-		if err != nil {
-			return valid, fmt.Errorf("error parsing first position in policy: %s", err.Error())
-		}
+type inst struct {
+	password string
+	policy   policy
+}
 
-		if (string(s[1][first]) == ss[1] && string(s[1][second]) != ss[1]) || (string(s[1][first]) != ss[1] && string(s[1][second]) == ss[1]) {
-			valid = valid + 1
+func newInst(line string) (inst, error) {
+	s := strings.Split(line, ":")
+	p, err := newPolicy(s[0])
+	if err != nil {
+		return inst{}, fmt.Errorf("failed to create instance: %s", err.Error())
+	}
+	return inst{
+		password: s[1],
+		policy:   p,
+	}, nil
+}
+
+// validates the part 1 policy style
+func validateCount(inst inst) bool {
+	var count int
+	var c string
+	for _, r := range inst.password {
+		c = string(r)
+		if c == inst.policy.letter {
+			count = count + 1
 		}
 	}
-	return valid, nil
+	return count >= inst.policy.lower && count <= inst.policy.upper
+}
+
+// validates the part 2 policy style
+func validatePosition(inst inst) bool {
+	return (string(inst.password[inst.policy.lower]) == inst.policy.letter && string(inst.password[inst.policy.upper]) != inst.policy.letter) || (string(inst.password[inst.policy.lower]) != inst.policy.letter && string(inst.password[inst.policy.upper]) == inst.policy.letter)
 }
