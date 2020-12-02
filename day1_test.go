@@ -6,7 +6,7 @@ func TestDay1(t *testing.T) {
 	t.Run("Part 1", func(t *testing.T) {
 		input := []int{1721, 979, 366, 299, 675, 1456}
 		expected := 514579
-		result, err := part1(input)
+		result, err := day1part1(input)
 		if err != nil {
 			t.Error(err)
 		}
@@ -19,7 +19,7 @@ func TestDay1(t *testing.T) {
 	t.Run("Part 2", func(t *testing.T) {
 		input := []int{1721, 979, 366, 299, 675, 1456}
 		expected := 241861950
-		result, err := part2(input)
+		result, err := day1part2(input)
 		if err != nil {
 			t.Error(err)
 		}

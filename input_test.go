@@ -5,7 +5,7 @@ import "testing"
 func TestReadInputFromFile(t *testing.T) {
 	path := "./input/day1-example"
 	expected := []int{1721, 979, 366, 299, 675, 1456}
-	result, err := ReadInputFromFile(path)
+	result, err := ReadNumbersFromFile(path)
 	if err != nil {
 		t.Errorf("failed reading fixture file: %s", err.Error())
 	}
