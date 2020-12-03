@@ -11,11 +11,19 @@ go build
 ./aoc2020
 ```
 
-If you'd like to run with your inputs instead of mine, first get get all of your inputs using `getinputs.sh`. Inspect the Advent of Code page to get your session cookie.
+To solve only a specific day, use the `-day` flag. To fetch inputs from [adventofcode.com] instead of reading files from the `./input/` directory, use the `-cookie` flag and pass your [adventofcode.com] session cookie. You can get this by inspecting the [adventofcode.com] page. 
+
+## Inputs 
+
+Puzzle inputs are different for everyone, and can be retrieved once you've logged in to [adventofcode.com]. 
+
+This repo ships with my own puzzle inputs in `./input/`. If you'd like to overwrite the files in `./input/` with your inputs, you can run `getinputs.sh` and pass your cookie. This will download all of the unlocked inputs.
 
 ```
-./getinputs.sh <COOKIE> && ./aoc2020
+./getinputs.sh <COOKIE>
 ```
+
+You can also pass the executable the `-cookie` flag to download the inputs in memory. This will not overwrite `./input/`
 
 ## Code Dependencies 
 
@@ -64,3 +72,5 @@ That one was cute. I went hamfisted with the solution I think. Let's dumb this d
 #### Prerelease
 
 Yeah, this feels a lot better. Also went back and really simplified the two solutions thus far. Need to re-test the helper functions for the days.
+
+Hey why even bother with a shell script amirite just let he script get the inputs
