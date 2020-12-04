@@ -73,4 +73,18 @@ That one was cute. I went hamfisted with the solution I think. Let's dumb this d
 
 Yeah, this feels a lot better. Also went back and really simplified the two solutions thus far. Need to re-test the helper functions for the days.
 
-Hey why even bother with a shell script amirite just let he script get the inputs
+Hey why even bother with a shell script amirite just let he script get the inputs.
+
+#### Done
+
+I liked this puzzle too. I got stuck on a few fiddly off-by-ones tbh. I also forgot to reset my pointer in the part 2 loop for a few iterations. 
+
+### Day 4
+
+#### Part 1
+
+Oof. The tailing blank line in the input was getting gobbled up and causing the last passport to be missed. Adding an extra whitespace fixed it. Majorly stuck on that one for a minute. Added a check for that last passport. Nasty little labeled continue there too :O
+
+#### Part 2 
+
+Off by 1 in the other direction?? There's a single passport slipping through the cracks somehow... 
