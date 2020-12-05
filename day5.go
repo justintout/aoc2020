@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"sort"
 )
 
@@ -23,6 +22,12 @@ func day5(inputs []string) (int, int, error) {
 	}
 	sort.Ints(ids)
 	part1 = ids[len(ids)-1]
+
+	for i := 1; i < len(ids)-1; i++ {
+		if ids[i+1] != ids[i]+1 && ids[i-1] != ids[1]-1 {
+			part2 = ids[i] + 1
+		}
+	}
 	return part1, part2, nil
 }
 
@@ -42,7 +47,6 @@ func seatID(pass string) int {
 			}
 			continue
 		}
-		fmt.Printf("one row left?? %v\n", row)
 
 		switch c {
 		case 'L':
@@ -51,7 +55,6 @@ func seatID(pass string) int {
 			col = col[len(col)/2:]
 		}
 
-		fmt.Printf("one col left?? %v\n", col)
 	}
 	return row[0]*8 + col[0]
 }
