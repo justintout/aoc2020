@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"regexp"
 	"strconv"
 	"strings"
@@ -45,7 +44,7 @@ PASSPORT:
 		}
 		part1 = part1 + 1
 		if valid(passport) {
-			fmt.Printf("valid:   %v\n", passport)
+			// fmt.Printf("valid:   %v\n", passport)
 			part2 = part2 + 1
 		}
 	}
@@ -61,7 +60,7 @@ func valid(passport string) bool {
 		}
 		ff := strings.Split(f, ":")
 		if !validators[ff[0]](ff[1]) {
-			fmt.Printf("invalid: %s (%s:%s)\n", passport, ff[0], ff[1])
+			// fmt.Printf("invalid: %s (%s:%s)\n", passport, ff[0], ff[1])
 			return false
 		}
 	}

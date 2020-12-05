@@ -88,3 +88,9 @@ Oof. The tailing blank line in the input was getting gobbled up and causing the 
 #### Part 2 
 
 Off by 1 in the other direction?? There's a single passport slipping through the cracks somehow... 
+
+### Day 5
+
+#### Part 1
+
+I feel like this is gonna take a big twist. Seems too straightforward...

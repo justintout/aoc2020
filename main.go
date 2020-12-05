@@ -14,7 +14,7 @@ import (
 var cookie *string = flag.String("cookie", "", "adventofcode.com session cookie. if supplied, the script will fetch inputs from adventofcode.com")
 var day *int = flag.Int("day", 0, "solve only the given day, instead of all unlocked days")
 
-var days []solver = []solver{day1, day2, day3, day4}
+var days []solver = []solver{day1, day2, day3, day4, day5}
 
 func main() {
 	flag.Parse()
